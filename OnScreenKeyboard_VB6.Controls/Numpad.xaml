@@ -1,0 +1,29 @@
+﻿<Window x:Class="OnScreenKeyboard_VB6.Controls.Numpad"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:WpfKb.Controls;assembly=WpfKb"
+        xmlns:StringConverter="clr-namespace:OnScreenKeyboard_VB6.Controls" Title="Numpad" Height="500" Width="420" WindowStartupLocation="Manual" Background="Black" >
+
+    <Window.Resources>
+        <StringConverter:StringVisibilityConverter x:Key="StringVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="1" Text="{Binding Path=UserText,UpdateSourceTrigger=Explicit}" HorizontalAlignment="Stretch" Margin="8" Name="_textBox" VerticalAlignment="Center" FontSize="28" />
+        <my:OnScreenKeypad Grid.Row="2" HorizontalAlignment="Stretch" Margin="4" Name="_numpad" VerticalAlignment="Stretch"
+                           x:FieldModifier="private" />
+
+        <StackPanel HorizontalAlignment="Stretch" Margin="12" Name="_stackPanel" VerticalAlignment="Center" Grid.Row="0" Orientation="Horizontal" Visibility="{Binding Path=ControlName,Converter={StaticResource StringVisibilityConverter}}">
+            <Label Name="lblControlName" Content="Eingabefeld:" Foreground="White" FontFamily="Araial" FontSize="16" />
+            <Label Content="{Binding Path=ControlName}" Foreground="White" FontFamily="Araial" FontSize="16" />
+            <Label Content="Beschreibung:" Foreground="White" FontFamily="Araial" FontSize="16" />
+            <Label Name="lblControlDescription" Content="{Binding Path=ControlDescription}" Foreground="White" FontFamily="Araial" FontSize="16" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="OnScreenKeyboard_VB6.Controls.Keyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"          
+             Title="Tastatur"
+             xmlns:my="clr-namespace:WpfKb.Controls;assembly=WpfKb"    
+             xmlns:StringConverter="clr-namespace:OnScreenKeyboard_VB6.Controls" 
+             MinHeight="298" MinWidth="725" Height="596" Width="1451" WindowStartupLocation="CenterScreen" Background="Black">
+    
+    <Window.Resources>
+        <StringConverter:StringVisibilityConverter x:Key="StringVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <my:OnScreenKeyboard HorizontalAlignment="Stretch" Margin="0" Name="_onScreenKeyboard" VerticalAlignment="Stretch" Grid.Row="2" />
+        <TextBox Text="{Binding Path=UserText,UpdateSourceTrigger=Explicit}" HorizontalAlignment="Stretch" Margin="12" Name="_textBox" VerticalAlignment="Center" FontSize="28" Grid.Row="1" />
+
+        <StackPanel HorizontalAlignment="Stretch" Margin="12" Name="_stackPanel" VerticalAlignment="Center" Grid.Row="0" Orientation="Horizontal" Visibility="{Binding Path=ControlName,Converter={StaticResource StringVisibilityConverter}}">            
+            <Label Name="lblControlName" Content="Eingabefeld:" Foreground="White" FontSize="16" FontFamily="Arial" />            
+            <Label Content="{Binding Path=ControlName}" Foreground="White" FontSize="16" FontFamily="Arial" />
+            <Label Content="Beschreibung:" Foreground="White" FontSize="16" FontFamily="Arial" />
+            <Label Name="lblControlDescription" Content="{Binding Path=ControlDescription}" Foreground="White" FontSize="16" FontFamily="Arial" />
+        </StackPanel>
+    </Grid>
+</Window>
